@@ -2,8 +2,7 @@ module AdventOfCode2018.Day02
 open System
 open System.Collections.Generic
 
-let run() =
-    let input = "bpacnmelhhzpygfsjoxtvkwuor
+let input = "bpacnmelhhzpygfsjoxtvkwuor
 biacnmelnizqygfsjoctvkwudr
 bpaccmllhizyygfsjoxtvkwudr
 rpacnmelhizqsufsjoxtvkwudr
@@ -253,21 +252,24 @@ bpocnmclhizqygfsjoxtvkwukr
 zpacnmwlhizqygfsjoxzvkwudr
 bpacpoelhqzqygfsjoxtvkwudr
 bpacnlelhizqyzfsjoxtvkwukr"
+
+let runPart1 () =
+    let splitInput = input.Split(Environment.NewLine)
+
+    let charCounts = splitInput |> Seq.map (fun x ->
+        let grouped = x.ToCharArray() |> Array.countBy id |> Array.map snd
+        let contains2 = if (grouped |> Array.contains 2) then 1 else 0
+        let contains3 = if (grouped |> Array.contains 3) then 1 else 0
+        (contains2, contains3)
+    )
     
+    let checksum = (charCounts |> Seq.map fst |> Seq.sum) * (charCounts |> Seq.map snd |> Seq.sum)
+    
+    printfn "%i" checksum
+
+let runPart2 () =
     let splitInput = input.Split(Environment.NewLine)
     
-    let part1 () = 
-        let charCounts = splitInput |> Seq.map (fun x ->
-            let grouped = x.ToCharArray() |> Array.countBy id |> Array.map snd
-            let contains2 = if (grouped |> Array.contains 2) then 1 else 0
-            let contains3 = if (grouped |> Array.contains 3) then 1 else 0
-            (contains2, contains3)
-        )
-        
-        let checksum = (charCounts |> Seq.map fst |> Seq.sum) * (charCounts |> Seq.map snd |> Seq.sum)
-        
-        printfn "%i" checksum
-
     let similarity (s1:string) (s2:string) =
         let zipped = Array.zip (s1.ToCharArray()) (s2.ToCharArray())
         zipped |> Seq.sumBy (fun x -> if (fst x) = (snd x) then 1 else 0)

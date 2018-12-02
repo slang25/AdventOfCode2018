@@ -2,8 +2,7 @@ module AdventOfCode2018.Day01
 open System
 open System.Collections.Generic
 
-let run() =
-    let input = @"-8
+let input = @"-8
 -18
 -14
 -10
@@ -1031,6 +1030,8 @@ let run() =
 -10
 -5
 +141482"
+
+let runPart2() =
     let set = HashSet()
     let result =
         Seq.initInfinite (fun _ -> input.Split(Environment.NewLine))
