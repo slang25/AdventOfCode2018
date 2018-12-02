@@ -1,4 +1,5 @@
 module AdventOfCode2018.Day01
+
 open System
 open System.Collections.Generic
 
@@ -1033,12 +1034,12 @@ let input = @"-8
 
 let runPart2() =
     let set = HashSet()
+
     let result =
-        Seq.initInfinite (fun _ -> input.Split(Environment.NewLine))
+        Seq.initInfinite(fun _ -> input.Split(Environment.NewLine))
         |> Seq.collect id
         |> Seq.map int
         |> Seq.scan (fun x acc -> acc + x) 0
-        |> Seq.find (fun x -> not <| set.Add x)
+        |> Seq.find(fun x -> not <| set.Add x)
     printfn "%i" Int64.MaxValue
     printfn "%i" result
-
