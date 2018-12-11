@@ -4,5 +4,5 @@ open System
 
 [<EntryPoint>]
 let main argv =
-    Day03.runPart2()
+    Day04.runPart1()
     0 // return an integer exit code
